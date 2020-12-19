@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>dropdown check</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>6b0f4b5d-e3fc-49da-abe8-270751bc70ab</testCaseGuid>
+   <variable>
+      <defaultValue>'Tokyo CURA Healthcare Center'</defaultValue>
+      <description></description>
+      <id>bd3c30b3-2d6e-4111-875d-3091c9174e2e</id>
+      <masked>false</masked>
+      <name>dropdown1</name>
+   </variable>
+   <variable>
+      <defaultValue>'Hongkong CURA Healthcare Center'</defaultValue>
+      <description></description>
+      <id>3a444ed1-b88f-4513-aa51-9792aee2e44f</id>
+      <masked>false</masked>
+      <name>dropdown2</name>
+   </variable>
+   <variable>
+      <defaultValue>'Seoul CURA Healthcare Center'</defaultValue>
+      <description></description>
+      <id>5c6d158b-0175-4500-9564-dd835b11e86e</id>
+      <masked>false</masked>
+      <name>dropdown3</name>
+   </variable>
+</TestCaseEntity>
