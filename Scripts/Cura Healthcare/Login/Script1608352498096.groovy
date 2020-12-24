@@ -14,16 +14,66 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import java.io.FileInputStream as FileInputStream
+import java.io.FileNotFoundException as FileNotFoundException
+import java.io.IOException as IOException
+import java.util.Date as Date
+import org.apache.poi.xssf.usermodel.XSSFCell as XSSFCell
+import org.apache.poi.xssf.usermodel.XSSFRow as XSSFRow
+import org.apache.poi.xssf.usermodel.XSSFSheet as XSSFSheet
+import org.apache.poi.xssf.usermodel.XSSFWorkbook as XSSFWorkbook
+import java.lang.String as String
 
-WebUI.openBrowser('https://katalon-demo-cura.herokuapp.com/profile.php#login')
+WebUI.openBrowser('')
 
-WebUI.setText(findTestObject('Cura Healthcare/Username'), 'John Doe')
+WebUI.navigateToUrl('https://katalon-demo-cura.herokuapp.com/profile.php#login')
 
-WebUI.delay(2)
+for (def RowNum = 1; RowNum <= 3; RowNum++) {
+    WebUI.setText(findTestObject('Cura Healthcare/Username'), findTestData('Cura Healthcare').getValue(1, RowNum))
 
-WebUI.setEncryptedText(findTestObject('Cura Healthcare/Password'), 'g3/DOGG74jC3Flrr3yH+3D/yKbOqqUNM')
+    WebUI.delay(2)
 
-WebUI.delay(2)
+    WebUI.setText(findTestObject('Cura Healthcare/Password'), findTestData('Cura Healthcare').getValue(2, RowNum))
 
-WebUI.click(findTestObject('Cura Healthcare/btn Login'))
+    WebUI.delay(2)
+
+    WebUI.click(findTestObject('Cura Healthcare/btn Login'))
+
+    Thread.sleep(3000)
+}
+String URLLoginSuccess = WebUI.getUrl()
+if (URLLoginSuccess == 'https://katalon-demo-cura.herokuapp.com/profile.php#login') {
+	FileInputStream file = new FileInputStream(new File('C:\\Users\\fuadn\\Documents\\coba Google.com\\test Cura Healtcare.xlsx'))
+
+	XSSFWorkbook workbook = new XSSFWorkbook(file)
+
+	XSSFSheet sheet = workbook.getSheetAt(0)
+
+	sheet.getRow(6).createCell(9).setCellValue('Test Success')
+
+	file.close()
+
+	FileOutputStream outFile = new FileOutputStream(new File('C:\\Users\\fuadn\\Documents\\coba Google.com\\test Cura Healtcare.xlsx'))
+
+	workbook.write(outFile)
+
+	outFile.close()
+} else {
+	FileInputStream file = new FileInputStream(new File('C:\\Users\\fuadn\\Documents\\coba Google.com\\test Cura Healtcare.xlsx'))
+
+	XSSFWorkbook workbook = new XSSFWorkbook(file)
+
+	XSSFSheet sheet = workbook.getSheetAt(0)
+
+	sheet.getRow(6).createCell(9).setCellValue('Test Failed')
+
+	file.close()
+
+	FileOutputStream outFile = new FileOutputStream(new File('C:\\Users\\fuadn\\Downloads\\Automation Alfacart\\Test case Alfacart Web.xlsx'))
+
+	workbook.write(outFile)
+
+	outFile.close()
+}
+
 
