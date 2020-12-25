@@ -28,7 +28,8 @@ WebUI.openBrowser('')
 
 WebUI.navigateToUrl('https://katalon-demo-cura.herokuapp.com/profile.php#login')
 
-for (def RowNum = 1; RowNum <= 3; RowNum++) {
+for (def RowNum = 1; RowNum <= findTestData('Cura Healthcare').getRowNumbers(); RowNum++){
+	
     WebUI.setText(findTestObject('Cura Healthcare/Username'), findTestData('Cura Healthcare').getValue(1, RowNum))
 
     WebUI.delay(2)
@@ -39,10 +40,10 @@ for (def RowNum = 1; RowNum <= 3; RowNum++) {
 
     WebUI.click(findTestObject('Cura Healthcare/btn Login'))
 
-    Thread.sleep(3000)
+    WebUI.delay(2)
 }
 String URLLoginSuccess = WebUI.getUrl()
-if (URLLoginSuccess == 'https://katalon-demo-cura.herokuapp.com/profile.php#login') {
+if (URLLoginSuccess == 'https://katalon-demo-cura.herokuapp.com/#appointment') {
 	FileInputStream file = new FileInputStream(new File('C:\\Users\\fuadn\\Documents\\coba Google.com\\test Cura Healtcare.xlsx'))
 
 	XSSFWorkbook workbook = new XSSFWorkbook(file)
@@ -69,11 +70,11 @@ if (URLLoginSuccess == 'https://katalon-demo-cura.herokuapp.com/profile.php#logi
 
 	file.close()
 
-	FileOutputStream outFile = new FileOutputStream(new File('C:\\Users\\fuadn\\Downloads\\Automation Alfacart\\Test case Alfacart Web.xlsx'))
+	FileOutputStream outFile = new FileOutputStream(new File('C:\\Users\\fuadn\\Documents\\coba Google.com\\test Cura Healtcare.xlsx'))
 
 	workbook.write(outFile)
 
 	outFile.close()
 }
-
+WebUI.closeBrowser()
 
